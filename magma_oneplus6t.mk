@@ -19,31 +19,17 @@
 # product configuration (apps).
 #
 
-VENDOR_EXCEPTION_PATHS := oneplus \
-    omni \
-    gapps \
-    pixelstyle
+VENDOR_EXCEPTION_PATHS := oneplus 
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
+# Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-
-# Get the prebuilt list of APNs
-$(call inherit-product, vendor/omni/config/gsm.mk)
-
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
-# must be before including omni part
-TARGET_BOOTANIMATION_SIZE := 1080p
-AB_OTA_UPDATER := true
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus6/overlay/common
 DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus6t/overlay/device
-DEVICE_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
 
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit some common Magma stuff.
+$(call inherit-product, vendor/magma/config/common_full_phone.mk)
 
 # # get the rest of aosp stuff after ours
 $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system_arm64.mk)
@@ -51,11 +37,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system_arm64.mk)
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/oneplus/oneplus6t/device.mk)
 
-ALLOW_MISSING_DEPENDENCIES := true
+#ALLOW_MISSING_DEPENDENCIES := true
 PRODUCT_SHIPPING_API_LEVEL := 28
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := omni_oneplus6t
+PRODUCT_NAME := magma_oneplus6t
 PRODUCT_DEVICE := oneplus6t
 PRODUCT_BRAND := OnePlus
 PRODUCT_MANUFACTURER := OnePlus
@@ -66,8 +52,7 @@ PRODUCT_SYSTEM_NAME := OnePlus6T
 
 VENDOR_RELEASE := 10/QKQ1.190716.003/1910050400:user/release-keys
 BUILD_FINGERPRINT := OnePlus/OnePlus6T/OnePlus6T:$(VENDOR_RELEASE)
-OMNI_BUILD_FINGERPRINT := OnePlus/OnePlus6T/OnePlus6T:$(VENDOR_RELEASE)
-OMNI_PRIVATE_BUILD_DESC := "'OnePlus6T-user 10 QKQ1.190716.003 1910050400 release-keys'"
+PRIVATE_BUILD_DESC := "'OnePlus6T-user 10 QKQ1.190716.003 1910050400 release-keys'"
 
 PLATFORM_SECURITY_PATCH_OVERRIDE := 2019-09-05
 

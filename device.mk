@@ -24,10 +24,15 @@ $(call inherit-product, vendor/oneplus/oneplus6/oneplus6-vendor.mk)
 # Prebuilt
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,device/oneplus/oneplus6t/prebuilt/system,system)
+	
+# Permissions
+PRODUCT_COPY_FILES += \
+    vendor/magma/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:system/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
+
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    omni.biometrics.fingerprint.inscreen@1.0-service.oneplus6t
+    lineage.biometrics.fingerprint.inscreen@1.0-service.oneplus_fajita
 
 # common oneplus6
 $(call inherit-product, device/oneplus/oneplus6/device.mk)

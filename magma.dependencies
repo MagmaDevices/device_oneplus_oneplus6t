@@ -1,0 +1,8 @@
+[
+  {
+    "remote": "github",
+    "repository": "MagmaDevices/device_oneplus_oneplus6",
+    "target_path": "device/oneplus/oneplus6",
+    "revision": "ten"
+  }
+]
